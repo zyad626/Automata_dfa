@@ -1,35 +1,39 @@
 from dfa import DFA
 
-Q = {'q1', 'q2', 'q3', 'q4'}
-segma = {'a','b'}
-transition_func = {
-    'q1':{
-        'a':'q2',
-        'b':'q1'
-    },
+Q = set()
+segma = set()
+transition_func = {}
+f = set()
 
-    'q2':{
-        'a':'q3',
-        'b':'q2'
-    },
+symbols = input("Enter alphabet symbols(a single character) separated by a space\n")
+for symbol in symbols.split(" "):
+    segma.add(symbol)
 
-    'q3':{
-        'a':'q4',
-        'b':'q3'
-    },
+states  = input("Enter the states separated by a space\n")
+for state in states.split(" "):
+    Q.add(state)
 
-    'q4':{
-        'a':'q4',
-        'b':'q4'
-    }
+q0 = input("Enter the start state of your DFA\n")
 
-}
-q0 = 'q1'
-f = {'q4'}
+final_states = input("Enter the final state(s) of your DFA separated by a space\n")
+for state in final_states.split(" "):
+    f.add(state)
+
+print("Enter the transition values\n")
+for state in Q:
+    transition_func[state] = {}
+    for symbol in segma:
+        print("(",state, " , ", symbol, ")")
+        transition_func[state][symbol] = input()
+        print("\n")
+
 
 myDFA = DFA(Q, segma, transition_func, q0, f)
 
-strings = {"abaa", "abbba", "bbb", "aa" ,"aaa"}
- 
-for string in strings:
-    print(string, myDFA.read(string))
+
+while(True):
+    string = input("Enter a string to test. To quit enter three dots.\n")
+    if string != "...":
+        print("Accepted" if myDFA.read(string) else "Rejected")
+    else:
+        break
