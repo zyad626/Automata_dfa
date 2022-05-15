@@ -1,5 +1,5 @@
 
-class DFA:
+class my_DFA:
     
     def __init__(self, Q, segma, transition_func, q0, f) -> None:
         self.Q = Q

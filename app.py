@@ -1,4 +1,6 @@
-from dfa import DFA
+from dfa_class import my_DFA
+from automata.fa.dfa import DFA
+from visual_automata.fa.dfa import VisualDFA
 
 Q = set()
 segma = set()
@@ -15,8 +17,8 @@ for state in states.split(" "):
 
 q0 = input("Enter the start state of your DFA\n")
 
-final_states = input("Enter the final state(s) of your DFA separated by a space\n")
-for state in final_states.split(" "):
+finalStates = input("Enter the final state(s) of your DFA separated by a space\n")
+for state in finalStates.split(" "):
     f.add(state)
 
 print("Enter the transition values\n")
@@ -28,8 +30,9 @@ for state in Q:
         print("\n")
 
 
-myDFA = DFA(Q, segma, transition_func, q0, f)
-
+myDFA = my_DFA(Q, segma, transition_func, q0, f)
+mydfa_visualized = VisualDFA(states=Q, input_symbols=segma, transitions=transition_func, initial_state=q0, final_states=f)
+mydfa_visualized.show_diagram(view=True)
 
 while(True):
     string = input("Enter a string to test. To quit enter three dots.\n")
