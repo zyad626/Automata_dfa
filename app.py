@@ -1,11 +1,16 @@
 #BEFORE RUNNING:
 #1. install graphviz and add it to path: https://graphviz.org/download/#:~:text=Windows%20install%20packages%3A-,graphviz%2D3.0.0,-graphviz%2D3.0.0%20(32
-#2. install visual_automata: pip install visual-automata
-#3. restart vscode or the terminal that you are using
+#2. install visual_automata:    pip install visual-automata
+#3. install termcolor library:  pip install termcolor
+#4. restart vscode or the terminal that you are using
 
+
+from colorama import init
+from termcolor import colored
 from dfa_class import my_DFA
-from automata.fa.dfa import DFA
 from visual_automata.fa.dfa import VisualDFA
+
+init() #for coloring the outputs
 
 Q = set()
 segma = set()
@@ -30,7 +35,7 @@ print("Enter the transition values\n")
 for state in Q:
     transition_func[state] = {}
     for symbol in segma:
-        print("(",state, " , ", symbol, ")")
+        print("(",state, " , ", symbol, ") = ",end="")
         transition_func[state][symbol] = input()
         print("\n")
 
@@ -42,6 +47,6 @@ mydfa_visualized.show_diagram(view=True)
 while(True):
     string = input("Enter a string to test. To quit enter three dots.\n")
     if string != "...":
-        print("Accepted" if myDFA.read(string) else "Rejected")
+        print(colored("Accepted", "white", "on_green") if myDFA.read(string) else colored("Rejected", "white", "on_red"))
     else:
         break
